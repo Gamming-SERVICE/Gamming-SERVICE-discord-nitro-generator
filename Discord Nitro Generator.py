@@ -4,17 +4,23 @@ import requests
 
 print("Discord Nitro Generator + Checker V1.0 - GAMMING-SERVICE & (TEAM)")
 print("GAMMING-SERVICE & (TEAM)'")
-print("Discord Server: https://discord.gg/rgk7EAGe")
+print("Discord Server: https://discord.gg/Fw4rK8Qu")
+
+alternatives = ["GAMMING-SERVICE", "https://discord.gg/Fw4rK8Qu"]
+alt_index = 0
 
 def check_nitro_code(code):
+    global alt_index
     response = requests.get(f"https://discord.com/api/v8/entitlements/gift-codes/{code}?with_application=false&with_subscription_plan=true")
     if response.status_code == 200:
-        print(f'Valid | {code}')
+        print(f'Valid | {code} | {alternatives[alt_index]}')
+        alt_index = (alt_index + 1) % len(alternatives)
         with open('Valid-discord-codes.txt', 'a') as f:
             f.write(f'{code}\n')
         return True
     else:
-        print(f'Invalid | {code}')
+        print(f'Invalid | {code} | {alternatives[alt_index]}')
+        alt_index = (alt_index + 1) % len(alternatives)
         with open('Invalid-discord-codes.txt', 'a') as f:
             f.write(f'{code}\n')
         return False
